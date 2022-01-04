@@ -3,11 +3,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:project_flutter_mygroup/data/database.dart';
+import 'package:project_flutter_mygroup/data/login.dart';
 import 'package:project_flutter_mygroup/models/user.dart';
 import './register_screen.dart';
 import '../components/background.dart';
 import 'package:http/http.dart' as http;
 
+import 'home_screen.dart';
 
 late final User user;
 
@@ -55,9 +58,9 @@ class _LoginScreenState extends State<LoginScreen> {
           print(dataaa.length );
           _passwordController.clear();
           _emailContoller.clear();
-          // Navigator.push(context,
-          //     // MaterialPageRoute(builder: (context) => HomeScreen(),
-          //     ));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => HomeScreen(),
+              ));
         }
       }
     }
