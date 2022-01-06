@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADD KQ</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<style>
+    html,
+    body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .main {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .box-form{
+        background-color: rgb(243, 243, 243);
+        padding: 1rem 2rem;
+        border-radius: 20px;
+        box-shadow: 0 0 10px;
+    }
+    label{
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<body>
+    <div class="container main">
+        <div class="col-3"></div>
+        <div class="col-6 box-form">
+            <form action="/ketqua" method="POST">
+                <div class="form-group">
+                    <h2 class="text-center">App Kết Quả</h2>
+                    <label>Mã SV: </label>
+                    <input class="form-control" type="text" name="maSV" placeholder="123">
+                </div>
+                <div class="form-group">
+                    <label>Mã MH: </label>
+                    <input class="form-control" type="text" name="maMH" placeholder="ABC">
+                </div>
+                <div class="form-group">
+                    <label>Điểm Thi: </label>
+                    <input class="form-control" type="number" name="diemThi" placeholder="1">
+                </div>
+                <div class="button">
+                    <a href="http://localhost:3000/ketqua" style="width: 40%; height: 38px;border-radius: 5px; color: white; font-size: 18px; text-decoration: none; line-height:38px; margin-right: 10%;" class="bg-primary text-center">List KQ</a>
+                    
+                    <input id="add-btn" class="btn btn-success" style="width: 40%;" type="submit" value="Add KQ">
+                </div>
+            </form>
+        </div>
+        <div class="col-3">
+           
+        </div>
+    </div>
+
+    
+</body>
+
+</html>
