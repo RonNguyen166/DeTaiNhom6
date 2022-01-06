@@ -29,6 +29,7 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
     listFood = fetchFood();
+
   }
   @override
   Widget build(BuildContext context) {

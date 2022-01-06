@@ -3,6 +3,7 @@ import 'package:project_flutter_mygroup/models/user.dart';
 
 import 'package:project_flutter_mygroup/widgets/favorite.dart';
 import 'package:project_flutter_mygroup/widgets/home.dart';
+import 'package:project_flutter_mygroup/widgets/order.dart';
 import 'package:project_flutter_mygroup/widgets/restaurant.dart';
 import 'package:project_flutter_mygroup/widgets/user.dart';
 
@@ -289,6 +290,10 @@ class _FoodAppState extends State<FoodApp> {
             title: Text("Home"),
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.article_outlined),
+            title: Text("Order"),
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.store),
             title: Text("Restaurant"),
           ),
@@ -300,6 +305,7 @@ class _FoodAppState extends State<FoodApp> {
             icon: Icon(Icons.person),
             title: Text("Profile"),
           ),
+
         ],
         currentIndex: _selectedIndex,
 
@@ -316,9 +322,11 @@ class _FoodAppState extends State<FoodApp> {
 
 List<Widget> listWidget =[
   HomeWidget(),
+  Order(),
+
   RestaurantWidget(),
   // RestaurantWidget(),
 
   FavoriteWidget(),
-  UserWidget()
+  UserWidget(),
 ];

@@ -20,7 +20,7 @@ class RegisterScreen extends StatelessWidget {
     registerr()async{
 
       if( _key.currentState!.validate()){
-        Future loginWithEmailPass(String email, String password, String phone, String userName) async {
+        Future registerrr(String email, String password, String phone, String userName) async {
           final response = await http.post(
               Uri.parse('http://192.168.1.4:3000/user/'),
               body: {
@@ -35,7 +35,7 @@ class RegisterScreen extends StatelessWidget {
           final datata = jsonDecode(response.body);
           return datata;
         }
-        await loginWithEmailPass(_emailContoller.text, _passwordController.text, _phoneContoller.text, _userNameController.text);
+        await registerrr(_emailContoller.text, _passwordController.text, _phoneContoller.text, _userNameController.text);
 
           _passwordController.clear();
           _emailContoller.clear();

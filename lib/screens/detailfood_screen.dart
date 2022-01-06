@@ -1,4 +1,6 @@
 
+
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:project_flutter_mygroup/data/data.dart';
 import 'package:project_flutter_mygroup/models/cart.dart';
@@ -7,9 +9,28 @@ import '../theme.dart';
 import './home_screen.dart';
 
 
+import 'detailcart_screen.dart';
+import 'login_screen.dart';
+
+
+
+
 
 
 class DetailFood extends StatefulWidget {
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -19,13 +40,30 @@ class _HomePageState extends State<DetailFood> {
 
 int quantily = 1;
 
+
   @override
   Widget build(BuildContext context) {
     final food = ModalRoute.of(context)!.settings.arguments as Food;
     double _price = quantily*food.price;
+
+    Future addToCart(String idUser, String nameFood, String urlImage, String price, String quantily) async {
+      final response = await http.post(
+          Uri.parse('http://192.168.1.4:3000/cart/'),
+          body: {
+            "idUser": idUser,
+            "nameFood": nameFood,
+            "urlImage": urlImage,
+            "price": price,
+            "quantily": quantily
+          }
+      );
+
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: orangecolor,
+
         title:  Text(
           'Detai Food',
           style: whiteTextStyle.copyWith(
@@ -126,31 +164,38 @@ int quantily = 1;
                               ),
                               Row(
                                 children: [
-                                  FloatingActionButton(onPressed:(){
-                                   if(quantily >1){
-                                     setState(() {
-                                       quantily--;
-                                     });
-                                   };
-                                  },
-                                    child: Icon(Icons.remove),
-                                    backgroundColor: darkbluecolor,
-                                    tooltip: 'increment',
+                                  Container(
+                                    width: 40,
+                                    child: FloatingActionButton(onPressed:(){
+                                     if(quantily >1){
+                                       setState(() {
+                                         quantily--;
+                                       });
+                                     };
+                                    },
+                                      child: Icon(Icons.remove),
+                                      backgroundColor: darkbluecolor,
+                                      tooltip: 'increment',
 
+
+                                    ),
                                   ),
                                   SizedBox(width: 15,),
                                   Text('${quantily}',style: darkblueTextStyle.copyWith(fontSize: 18),),
                                   SizedBox(width: 15,),
 
-                                  FloatingActionButton(onPressed:(){
-                                    setState(() {
-                                      quantily++;
-                                    });
-                                  },
-                                    child: Icon(Icons.add),
-                                    backgroundColor: Colors.deepOrange,
+                                  Container(
+                                    width: 40,
+                                    child: FloatingActionButton(onPressed:(){
+                                      setState(() {
+                                        quantily++;
+                                      });
+                                    },
+                                      child: Icon(Icons.add),
+                                      backgroundColor: Colors.deepOrange,
 
-                                    tooltip: 'decrement',
+                                      tooltip: 'decrement',
+                                    ),
                                   ),
                                   SizedBox(width: 40,),
                                   Text('Total: ${_price.toStringAsFixed(2)}',style: orangeTextStyle.copyWith(fontWeight: FontWeight.w600,fontSize: 18),)
@@ -158,18 +203,16 @@ int quantily = 1;
                                 ],
                               ),
                               SizedBox(height: 25,),
+
+
                               GestureDetector(
 
-                                onTap: (){
+
+                                onTap: () async {
+                                  await addToCart(user.id, food.nameFood, food.imageurl, food.price.toString(), quantily.toString());
+
 
                                   Navigator.pop(context);
-
-                                    listCart.add(new Cart(
-                                        nameFood: food.nameFood,
-                                        urlImage: food.imageurl,
-                                        price: food.price,
-                                        quantily: quantily));
-
                                 },
                                 child: Container(
                                   margin: EdgeInsets.symmetric(

@@ -7,7 +7,7 @@ import 'package:project_flutter_mygroup/screens/detailfood_screen.dart';
 
 import '../main.dart';
 
-
+List<Food> listFoods = [];
 
 
 class HomeWidget extends StatefulWidget {
@@ -89,21 +89,20 @@ class _HomeWidgetState extends State<HomeWidget> {
                 );
               }else if (snapshot.hasData) {
 
-                  List<Food> listFood = snapshot.data!;
-
+                  listFoods = snapshot.data!;
 
                 return  GridView.builder(
 
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
 
-                  itemCount: listFood.length,
+                  itemCount: listFoods.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: (){
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => DetailFood(),
                               settings: RouteSettings(
-                                arguments: listFood[index],
+                                arguments: listFoods[index],
                               ),));
                       },
                       child: SafeArea(
@@ -122,7 +121,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Image.asset(
-                                      listFood[index].imageurl,
+                                      listFoods[index].imageurl,
                                       height: 65.0,
                                       fit: BoxFit.cover,
                                     ),
@@ -131,7 +130,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     ),
                                     Flexible(
                                       child: Text(
-                                        listFood[index].nameFood,
+                                        listFoods[index].nameFood,
                                         style: TextStyle(
                                           fontSize: 22.0,
                                           fontWeight: FontWeight.w600,
@@ -145,7 +144,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            "${ listFood[index].price} \$",
+                                            "${ listFoods[index].price} \$",
                                             style: TextStyle(
                                               fontSize: 22.0,
                                               fontWeight: FontWeight.w700,
@@ -156,16 +155,16 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           child: IconButton(
                                             onPressed: () {
                                               setState(() {
-                                                listFood[index] = Food(
-                                                    nameFood: listFood[index].nameFood,
-                                                    price: listFood[index].price,
-                                                    point: listFood[index].point,
-                                                    description: listFood[index].description,
-                                                    imageurl: listFood[index].imageurl,
-                                                    favorite: !listFood[index].favorite);
+                                                listFoods[index] = Food(
+                                                    nameFood: listFoods[index].nameFood,
+                                                    price: listFoods[index].price,
+                                                    point: listFoods[index].point,
+                                                    description: listFoods[index].description,
+                                                    imageurl: listFoods[index].imageurl,
+                                                    favorite: !listFoods[index].favorite);
                                               });
                                             },
-                                            icon: listFood[index].favorite?Icon(
+                                            icon: listFoods[index].favorite?Icon(
                                               Icons.favorite,
                                               color: Colors.red,
                                             ):Icon(
@@ -191,100 +190,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                 child: CircularProgressIndicator(),
                 );}}
             ),
-            // child: GridView.builder(
-            //
-            //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-            //
-            //   itemCount: listFood.length,
-            //   itemBuilder: (context, index) {
-            //     return GestureDetector(
-            //       onTap: (){
-            //         Navigator.push(context,
-            //             MaterialPageRoute(builder: (context) => DetailFood(),
-            //               settings: RouteSettings(
-            //                 arguments: listFood[index],
-            //               ),));
-            //       },
-            //       child: SafeArea(
-            //         child: Expanded(
-            //           child: Container(
-            //
-            //             decoration: BoxDecoration(
-            //                 borderRadius: BorderRadius.circular(10)
-            //             ),
-            //
-            //
-            //             child: Card(
-            //               child: Padding(
-            //                 padding: const EdgeInsets.all(8.0),
-            //                 child: Column(
-            //                   crossAxisAlignment: CrossAxisAlignment.start,
-            //                   children: [
-            //                     Image.asset(
-            //                       listFood[index].imageurl,
-            //                       height: 65.0,
-            //                       fit: BoxFit.cover,
-            //                     ),
-            //                     SizedBox(
-            //                       height: 8.0,
-            //                     ),
-            //                     Flexible(
-            //                       child: Text(
-            //                         listFood[index].nameFood,
-            //                         style: TextStyle(
-            //                           fontSize: 22.0,
-            //                           fontWeight: FontWeight.w600,
-            //                         ),
-            //                       ),
-            //                     ),
-            //                     SizedBox(
-            //                       height: 10.0,
-            //                     ),
-            //                     Row(
-            //                       children: [
-            //                         Expanded(
-            //                           child: Text(
-            //                             "${ listFood[index].price} \$",
-            //                             style: TextStyle(
-            //                               fontSize: 22.0,
-            //                               fontWeight: FontWeight.w700,
-            //                             ),
-            //                           ),
-            //                         ),
-            //                         Expanded(
-            //                           child: IconButton(
-            //                             onPressed: () {
-            //                               setState(() {
-            //                                 listFood[index] = Food(
-            //                                     nameFood: listFood[index].nameFood,
-            //                                     price: listFood[index].price,
-            //                                     point: listFood[index].point,
-            //                                     description: listFood[index].description,
-            //                                     imageurl: listFood[index].imageurl,
-            //                                     favorite: !listFood[index].favorite);
-            //                               });
-            //                             },
-            //                             icon: listFood[index].favorite?Icon(
-            //                               Icons.favorite,
-            //                               color: Colors.red,
-            //                             ):Icon(
-            //                               Icons.favorite_border,
-            //                               color: Colors.black,
-            //                             ),
-            //                           ),
-            //                         )
-            //                       ],
-            //                     )
-            //                   ],
-            //                 ),
-            //               ),
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //     );
-            //   },
-            // ),
+
 
           )
         ],
